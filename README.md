@@ -7,7 +7,7 @@ DRF about books
 ### Basics
 
     'Python 3.7'
-    'Django 3.1.3'
+    'Django 3.1.6'
     'djangorestframework 3.12.2'
 
 ### Get the project and install it 
