@@ -4,7 +4,7 @@ from django.utils.translation import gettext as _
 
 class Book(models.Model):
     title = models.CharField(max_length=250, verbose_name=_('Tytuł'), null=True)
-    publisher = models.ForeignKey('Publisher', on_delete=models.SET_NULL, verbose_name=_('Wydawca'), null=True)
+    publisher = models.ForeignKey('Publisher', related_name='cos', on_delete=models.SET_NULL, verbose_name=_('Wydawca'), null=True)
     pages_num = models.PositiveBigIntegerField(null=True, verbose_name=_('Liczba stron'), blank=True)
     cover_image = models.ImageField(upload_to='imgs/', default='imgs/none.jpg', verbose_name=_('Okładka'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Data utworzenia'))
