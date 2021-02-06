@@ -11,7 +11,6 @@ class PubNameSerializer(serializers.ModelSerializer):
 
 class BookSerializer(serializers.ModelSerializer):
     publisher = PubNameSerializer(read_only=True)
-
     class Meta:
         model = Book
         fields = ['id', 'title', 'cover_image', 'publisher']
@@ -24,7 +23,7 @@ class AuthorInfoSerializer(serializers.ModelSerializer):
 
 
 class BookAuthorSerializer(serializers.ModelSerializer):
-    writer = AuthorInfoSerializer(source='author')
+    writer = AuthorInfoSerializer(source='author', read_only=True)
 
     class Meta:
         model = BookAuthor
@@ -32,7 +31,8 @@ class BookAuthorSerializer(serializers.ModelSerializer):
 
 
 class BookDetailSerializer(serializers.ModelSerializer):
-    authors_list = BookAuthorSerializer(source='authors', many=True)
+    authors_list = BookAuthorSerializer(source='authors', many=True, read_only=True)
+    cover_image = serializers.ImageField(read_only=True)
 
     class Meta:
         model = Book
