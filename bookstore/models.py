@@ -4,7 +4,9 @@ from django.utils.translation import gettext as _
 
 class Book(models.Model):
     title = models.CharField(max_length=250, verbose_name=_('Tytuł'), null=True)
-    publisher = models.ForeignKey('Publisher', related_name='cos', on_delete=models.SET_NULL, verbose_name=_('Wydawca'), null=True)
+    publisher = models.ForeignKey(
+        'Publisher', related_name='cos', on_delete=models.SET_NULL, verbose_name=_('Wydawca'), null=True
+    )
     pages_num = models.PositiveBigIntegerField(null=True, verbose_name=_('Liczba stron'), blank=True)
     cover_image = models.ImageField(upload_to='imgs/', default='imgs/none.jpg', verbose_name=_('Okładka'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Data utworzenia'))
@@ -30,17 +32,21 @@ class Publisher(models.Model):
 
 
 class BookAuthor(models.Model):
-    book = models.ForeignKey('Book', on_delete=models.SET_NULL, related_name='authors', verbose_name=_('Ksiązki'),
-                             null=True)
-    author = models.ForeignKey('Author', on_delete=models.SET_NULL, related_name='books', verbose_name=_('Autorzy'),
-                               null=True)
+    book = models.ForeignKey(
+        'Book', on_delete=models.SET_NULL, related_name='authors', verbose_name=_('Ksiązki'), null=True
+    )
+    author = models.ForeignKey(
+        'Author', on_delete=models.SET_NULL, related_name='books', verbose_name=_('Autorzy'), null=True
+    )
 
     class Meta:
         verbose_name = _('Autor')
         verbose_name_plural = _('Autorzy')
 
     def __str__(self):
-        return self.author.firstname + self.author.lastname
+        if self.author:
+            return "{} {} - {}".format(self.author.firstname, self.author.lastname, self.book.title)
+        return self.book.title
 
 
 class Author(models.Model):

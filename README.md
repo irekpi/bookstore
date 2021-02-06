@@ -1,8 +1,5 @@
 # Bookstore
 
-DRF about books
-
-
 
 ### Basics
 
@@ -18,9 +15,8 @@ DRF about books
     "pip install -r requirements.txt" - https://pip.pypa.io/en/stable/reference/pip_freeze/
 
 
-The most important thing
 
-When we get all requirements we start our server with lines below
+Once you get all the requirements in order to start server type lanes below
 
 
     python manage.py migrate
