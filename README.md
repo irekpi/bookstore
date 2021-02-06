@@ -26,7 +26,3 @@ When we get all requirements we start our server with lines below
     python manage.py migrate
     python manage.py runserver
 
-
-In order to run tests type 
-
-    python manage.py test
