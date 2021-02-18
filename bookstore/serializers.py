@@ -11,10 +11,11 @@ class PubNameSerializer(serializers.ModelSerializer):
 
 class BookSerializer(serializers.ModelSerializer):
     publisher = PubNameSerializer(read_only=True)
+    url = serializers.HyperlinkedIdentityField(view_name="bookstore:book-detail")
 
     class Meta:
         model = Book
-        fields = ['id', 'title', 'cover_image', 'publisher']
+        fields = ['id', 'url', 'title', 'cover_image', 'publisher']
 
 
 class AuthorInfoSerializer(serializers.ModelSerializer):
@@ -42,15 +43,19 @@ class BookDetailSerializer(serializers.ModelSerializer):
 
 
 class PublisherSerializer(serializers.ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name="bookstore:publisher-detail")
+
     class Meta:
         model = Publisher
-        fields = ['id', 'name']
+        fields = ['id', 'url', 'name']
 
 
 class AuthorSerializer(serializers.ModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name="bookstore:author-detail")
+
     class Meta:
         model = Author
-        fields = ['id', 'firstname', 'lastname', 'nickname', 'birthdate']
+        fields = ['id', 'url', 'firstname', 'lastname', 'nickname', 'birthdate']
 
 
 class BookInfoSerializer(serializers.ModelSerializer):
